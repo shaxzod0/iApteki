@@ -9,10 +9,10 @@ import UIKit
 
 class SearchVC: UIViewController {
     let searchTF = UITextField()
+    weak var collectionView: UICollectionView?
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
-        
         initViews()
     }
 }
@@ -30,5 +30,6 @@ extension SearchVC{
             make.height.equalTo(55)
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
         }
+        
     }
 }

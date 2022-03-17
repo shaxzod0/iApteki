@@ -26,6 +26,11 @@
 		799C5C2627E2FBD80059E872 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799C5C2527E2FBD80059E872 /* SearchVC.swift */; };
 		799C5C2827E2FBE90059E872 /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799C5C2727E2FBE90059E872 /* NotificationVC.swift */; };
 		799C5C2B27E2FBFA0059E872 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799C5C2A27E2FBFA0059E872 /* SettingsVC.swift */; };
+		799C5C2E27E355390059E872 /* ItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799C5C2D27E355390059E872 /* ItemsCell.swift */; };
+		799C5C3027E357120059E872 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799C5C2F27E357120059E872 /* MainVC.swift */; };
+		799C5C3227E35A460059E872 /* PharmaciesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799C5C3127E35A460059E872 /* PharmaciesCell.swift */; };
+		799C5C3427E362DC0059E872 /* PharmaciesSharesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799C5C3327E362DC0059E872 /* PharmaciesSharesHeader.swift */; };
+		799C5C3627E363380059E872 /* SharesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799C5C3527E363380059E872 /* SharesCell.swift */; };
 		79D554DB27E1105600C4B8B4 /* CodeConfirmationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D554DA27E1105600C4B8B4 /* CodeConfirmationVC.swift */; };
 		79D554DD27E1127B00C4B8B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79D554DC27E1127B00C4B8B4 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -52,6 +57,11 @@
 		799C5C2527E2FBD80059E872 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		799C5C2727E2FBE90059E872 /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
 		799C5C2A27E2FBFA0059E872 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		799C5C2D27E355390059E872 /* ItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCell.swift; sourceTree = "<group>"; };
+		799C5C2F27E357120059E872 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		799C5C3127E35A460059E872 /* PharmaciesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmaciesCell.swift; sourceTree = "<group>"; };
+		799C5C3327E362DC0059E872 /* PharmaciesSharesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmaciesSharesHeader.swift; sourceTree = "<group>"; };
+		799C5C3527E363380059E872 /* SharesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharesCell.swift; sourceTree = "<group>"; };
 		79D554DA27E1105600C4B8B4 /* CodeConfirmationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeConfirmationVC.swift; sourceTree = "<group>"; };
 		79D554DC27E1127B00C4B8B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A8157D0B30C80DC71F30B1BE /* Pods_iApteki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iApteki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +143,7 @@
 				799C5C2527E2FBD80059E872 /* SearchVC.swift */,
 				799C5C2727E2FBE90059E872 /* NotificationVC.swift */,
 				799C5C2A27E2FBFA0059E872 /* SettingsVC.swift */,
+				799C5C2F27E357120059E872 /* MainVC.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -157,7 +168,11 @@
 		798D1A1E27E0FF8E001FA7A5 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				799C5C2C27E354810059E872 /* header */,
 				798D1A1F27E1001E001FA7A5 /* IntroductionCell.swift */,
+				799C5C2D27E355390059E872 /* ItemsCell.swift */,
+				799C5C3127E35A460059E872 /* PharmaciesCell.swift */,
+				799C5C3527E363380059E872 /* SharesCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -170,6 +185,14 @@
 				798D1A2927E10F3B001FA7A5 /* Button.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		799C5C2C27E354810059E872 /* header */ = {
+			isa = PBXGroup;
+			children = (
+				799C5C3327E362DC0059E872 /* PharmaciesSharesHeader.swift */,
+			);
+			path = header;
 			sourceTree = "<group>";
 		};
 		DF321E9703B9A340DC7577DB /* Pods */ = {
@@ -296,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				799C5C3227E35A460059E872 /* PharmaciesCell.swift in Sources */,
 				799C5C2B27E2FBFA0059E872 /* SettingsVC.swift in Sources */,
 				798D1A2627E108EA001FA7A5 /* LoginVC.swift in Sources */,
 				798D1A1B27E0FA48001FA7A5 /* Model.swift in Sources */,
@@ -304,14 +328,18 @@
 				798D1A2827E10E04001FA7A5 /* TextField.swift in Sources */,
 				798D1A1827E0F77C001FA7A5 /* UserDefaultManager.swift in Sources */,
 				799C5C2627E2FBD80059E872 /* SearchVC.swift in Sources */,
+				799C5C2E27E355390059E872 /* ItemsCell.swift in Sources */,
 				798D1A0027E0F5C1001FA7A5 /* ViewController.swift in Sources */,
 				798D19FC27E0F5C1001FA7A5 /* AppDelegate.swift in Sources */,
 				798D19FE27E0F5C1001FA7A5 /* SceneDelegate.swift in Sources */,
+				799C5C3627E363380059E872 /* SharesCell.swift in Sources */,
+				799C5C3027E357120059E872 /* MainVC.swift in Sources */,
 				798D1A1D27E0FA53001FA7A5 /* MockData.swift in Sources */,
 				798D1A1527E0F71A001FA7A5 /* TabBarController.swift in Sources */,
 				798D1A2027E1001E001FA7A5 /* IntroductionCell.swift in Sources */,
 				798D1A2A27E10F3B001FA7A5 /* Button.swift in Sources */,
 				798D1A0627E0F5C1001FA7A5 /* iApteki.xcdatamodeld in Sources */,
+				799C5C3427E362DC0059E872 /* PharmaciesSharesHeader.swift in Sources */,
 				799C5C2827E2FBE90059E872 /* NotificationVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,10 +16,13 @@ class TabBarController: SOTabBarController {
         let searchVC = SearchVC()
         let notificationVC = NotificationVC()
         let settingsVC = SettingsVC()
+        let mainVC = MainVC()
+        
+        mainVC.tabBarItem = UITabBarItem(title: "Menu", image: UIImage(named: "menu"), selectedImage: UIImage(named: "menu-sel"))
         searchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "search"), selectedImage: UIImage(named: "search-sel"))
         notificationVC.tabBarItem = UITabBarItem(title: "Notification", image: UIImage(named: "not"), selectedImage: UIImage(named: "not-sel"))
         settingsVC.tabBarItem = UITabBarItem(title: "settings", image: UIImage(named: "set"), selectedImage: UIImage(named: "set-sel"))
-        viewControllers = [searchVC,notificationVC,settingsVC]
+        viewControllers = [mainVC,searchVC,notificationVC,settingsVC]
         initNavigationView()
     }
     override func loadView() {

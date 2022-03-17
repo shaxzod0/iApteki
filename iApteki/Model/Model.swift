@@ -12,3 +12,13 @@ struct IntroductionModel{
     let titleText: String
     let subtitleText: String
 }
+struct PharmacyStoresModel{
+    let pharmacyName: String
+    let pharmacyAddress: String
+    let pharmacyLogo: String
+    let pharmacyPhone: String
+}
+
+struct SharesModel{
+    let shareImage: String
+}

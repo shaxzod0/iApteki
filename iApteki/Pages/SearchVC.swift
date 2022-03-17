@@ -30,6 +30,14 @@ extension SearchVC{
             make.height.equalTo(55)
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
         }
-        
+        let segmentItems = ["Available", "Nearest"]
+        let searchSegmentController = UISegmentedControl(items: segmentItems)
+        view.addSubview(searchSegmentController)
+        searchSegmentController.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(searchTF.snp.bottom).offset(10)
+            make.width.equalToSuperview().multipliedBy(0.8)
+            make.height.equalTo(55)
+        }
     }
 }

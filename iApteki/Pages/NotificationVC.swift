@@ -12,10 +12,19 @@ class NotificationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
+        let addNotification = UIBarButtonItem(image: UIImage(named: "add"), style: .done, target: self, action: #selector(addNotification))
+        tabBarController?.navigationItem.rightBarButtonItem = addNotification
         // Do any additional setup after loading the view.
     }
     
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let addNotification = UIBarButtonItem(image: UIImage(named: "add"), style: .done, target: self, action: #selector(addNotification))
+        tabBarController?.navigationItem.rightBarButtonItem = addNotification
+    }
+    @objc func addNotification(){
+        return
+    }
     /*
     // MARK: - Navigation
 

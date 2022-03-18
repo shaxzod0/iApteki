@@ -15,6 +15,22 @@ class SearchVC: UIViewController {
         view.backgroundColor = .backgroundColor
         initViews()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+    }
+    internal func setupNavigationBar() {
+        let logoView = UIImageView()
+        logoView.image = UIImage(named: "horizontalLogo")
+        if let tabBarVC = parent as? TabBarController {
+            tabBarVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "notifi"), style: .done, target: self, action: #selector(goToNotification))
+            tabBarVC.navigationItem.titleView = logoView
+        }
+    }
+    @objc func goToNotification(){
+        let vc = NotificationVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension SearchVC{
@@ -37,7 +53,9 @@ extension SearchVC{
             make.centerX.equalToSuperview()
             make.top.equalTo(searchTF.snp.bottom).offset(10)
             make.width.equalToSuperview().multipliedBy(0.8)
-            make.height.equalTo(55)
+            make.height.equalTo(40)
         }
+        
+        
     }
 }

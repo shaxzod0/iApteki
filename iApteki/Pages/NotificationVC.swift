@@ -12,27 +12,28 @@ class NotificationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
-        let addNotification = UIBarButtonItem(image: UIImage(named: "add"), style: .done, target: self, action: #selector(addNotification))
-        tabBarController?.navigationItem.rightBarButtonItem = addNotification
-        // Do any additional setup after loading the view.
+ 
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
-        let addNotification = UIBarButtonItem(image: UIImage(named: "add"), style: .done, target: self, action: #selector(addNotification))
-        tabBarController?.navigationItem.rightBarButtonItem = addNotification
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tabBarController?.navigationController?.navigationItem.setRightBarButton(nil, animated: false)
+        self.tabBarController?.navigationController?.navigationBar.isTranslucent = false
+
+    }
+    
+    internal func setupNavigationBar() {
+        title = "Notification list"
+        if let tabBarVC = parent as? TabBarController {
+            tabBarVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "add"), style: .done, target: self, action: #selector(addNotification))
+        }
     }
     @objc func addNotification(){
         return
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

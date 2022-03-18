@@ -23,6 +23,10 @@ class TabBarController: SOTabBarController {
         notificationVC.tabBarItem = UITabBarItem(title: "Notification", image: UIImage(named: "not"), selectedImage: UIImage(named: "not-sel"))
         settingsVC.tabBarItem = UITabBarItem(title: "settings", image: UIImage(named: "set"), selectedImage: UIImage(named: "set-sel"))
         viewControllers = [mainVC,searchVC,notificationVC,settingsVC]
+    
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         initNavigationView()
     }
     override func loadView() {

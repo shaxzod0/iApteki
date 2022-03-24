@@ -3,16 +3,17 @@
 
 target 'iApteki' do
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
 
+  use_frameworks!
+  
+  
   # Pods for iApteki
-	pod 'SnapKit'
-	pod 'AnimatedCollectionViewLayout'
-	pod 'Firebase'
-	pod 'FirebaseAuth'
-	pod 'Alamofire'
+  pod 'SnapKit'
+  pod 'AnimatedCollectionViewLayout'
+  pod 'Firebase'
+  pod 'FirebaseAuth'
+  pod 'Alamofire'
   pod "ViewAnimator"
-  pod 'AdvancedPageControl'
   pod 'IQKeyboardManager'
   pod 'GoogleSignIn'
   pod 'SOTabBar'

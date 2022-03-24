@@ -6,34 +6,30 @@
 //
 
 import UIKit
+import MapKit
 
 class SearchVC: UIViewController {
     let searchTF = UITextField()
     weak var collectionView: UICollectionView?
+    let locationManager = CLLocationManager()
+    var locationParam = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
         initViews()
+        locationManagerAuthorize()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
     }
-    internal func setupNavigationBar() {
-        let logoView = UIImageView()
-        logoView.image = UIImage(named: "horizontalLogo")
-        if let tabBarVC = parent as? TabBarController {
-            tabBarVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "notifi"), style: .done, target: self, action: #selector(goToNotification))
-            tabBarVC.navigationItem.titleView = logoView
-        }
-    }
-    @objc func goToNotification(){
-        let vc = NotificationVC()
-        navigationController?.pushViewController(vc, animated: true)
-    }
 }
+// MARK: UI
+extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource{
 
-extension SearchVC{
+    
     private func initViews(){
         view.addSubview(searchTF)
         searchTF.placeholder = "Search for medicine"
@@ -55,7 +51,74 @@ extension SearchVC{
             make.width.equalToSuperview().multipliedBy(0.8)
             make.height.equalTo(40)
         }
+        let l = UICollectionViewFlowLayout()
+        l.minimumInteritemSpacing = 15
+        l.minimumLineSpacing = 15
+        l.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: l)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(SearchItemsCell.self, forCellWithReuseIdentifier: SearchItemsCell.identifier)
+        view.addSubview(collectionView)
+        collectionView.backgroundColor = .clear
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(searchSegmentController.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        self.collectionView = collectionView
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchItemsCell.identifier, for: indexPath) as! SearchItemsCell
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.width - 20
+        return CGSize(width: width, height: 450)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    }
+    internal func setupNavigationBar() {
+        let logoView = UIImageView()
+        logoView.image = UIImage(named: "horizontalLogo")
+        if let tabBarVC = parent as? TabBarController {
+            tabBarVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "loc"), style: .done, target: self, action: #selector(getLocation))
+            tabBarVC.navigationItem.titleView = logoView
+        }
+    }
+}
+
+// MARK: Location
+extension SearchVC: CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            locationParam = "\(lat),\(lon)"
+            print(locationParam)
+            locationManager.stopUpdatingLocation()
+        }
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    func locationManagerAuthorize(){
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
         
-        
+        if CLLocationManager.locationServicesEnabled(){
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+    }
+    @objc func getLocation(){
+        locationManager.startUpdatingLocation()
     }
 }

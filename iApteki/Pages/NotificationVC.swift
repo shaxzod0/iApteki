@@ -20,13 +20,6 @@ class NotificationVC: UIViewController {
         super.viewWillAppear(animated)
         setupNavigationBar()
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.tabBarController?.navigationController?.navigationItem.setRightBarButton(nil, animated: false)
-        self.tabBarController?.navigationController?.navigationBar.isTranslucent = false
-
-    }
-    
     internal func setupNavigationBar() {
         title = "Notification list"
         if let tabBarVC = parent as? TabBarController {
@@ -34,6 +27,8 @@ class NotificationVC: UIViewController {
         }
     }
     @objc func addNotification(){
-        return
+        let vc = AddingNotificationController()
+        vc.modalPresentationStyle = .formSheet
+        self.present(vc, animated: false)
     }
 }

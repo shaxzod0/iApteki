@@ -1,5 +1,4 @@
 PODS:
-  - AdvancedPageControl (0.9.0)
   - Alamofire (5.5.0)
   - AnimatedCollectionViewLayout (1.1.0)
   - AppAuth (1.4.0):
@@ -114,7 +113,6 @@ PODS:
   - ViewAnimator (3.1.0)
 
 DEPENDENCIES:
-  - AdvancedPageControl
   - Alamofire
   - AnimatedCollectionViewLayout
   - Firebase
@@ -127,7 +125,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - AdvancedPageControl
     - Alamofire
     - AnimatedCollectionViewLayout
     - AppAuth
@@ -151,7 +148,6 @@ SPEC REPOS:
     - ViewAnimator
 
 SPEC CHECKSUMS:
-  AdvancedPageControl: 39e3b32b00b2d324c534f8e17cc6c5be9abe84b7
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   AnimatedCollectionViewLayout: 0c1a38c4be115c525c887be183fc91ef65737c5d
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
@@ -174,6 +170,6 @@ SPEC CHECKSUMS:
   SOTabBar: 27aea95bd6b39d1be3535c867a2cd3b5adc172e6
   ViewAnimator: a9ceed80266e00fd435ec4fb99b2df64d580d0e4
 
-PODFILE CHECKSUM: 510b15fcfb81382c885557c6fe7b90edf9a573ed
+PODFILE CHECKSUM: 4f1f7428202af795308cd9ef0ffcdebfe411bff4
 
 COCOAPODS: 1.11.2

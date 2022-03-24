@@ -9,28 +9,26 @@ import UIKit
 
 class SettingsVC: UIViewController {
     let logOutButton = UIButton()
+    let restView = UIView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .backgroundColor
         initViews()
-     }
+    }
 }
 
 extension SettingsVC{
     private func initViews(){
-        view.addSubview(logOutButton)
-        logOutButton.setTitle("Logout", for: .normal)
-        logOutButton.layer.cornerRadius = 12
-        logOutButton.backgroundColor = .greenColor
-        logOutButton.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.8)
-            make.height.equalTo(55)
+        view.addSubview(restView)
+        restView.backgroundColor = .white
+        restView.layer.cornerRadius = 12
+        restView.snp.makeConstraints { make in
+            make.height.equalToSuperview().multipliedBy(0.4)
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
+            make.width.equalToSuperview().multipliedBy(0.9)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
         }
-        logOutButton.addTarget(self, action: #selector(logOut), for: .touchUpInside)
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
@@ -39,18 +37,27 @@ extension SettingsVC{
         let logoView = UIImageView()
         logoView.image = UIImage(named: "horizontalLogo")
         if let tabBarVC = parent as? TabBarController {
-            tabBarVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "notifi"), style: .done, target: self, action: #selector(goToNotification))
+            tabBarVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "logout"), style: .done, target: self, action: #selector(goToNotification))
             tabBarVC.navigationItem.titleView = logoView
         }
     }
     @objc func goToNotification(){
-        let vc = NotificationVC()
-        navigationController?.pushViewController(vc, animated: true)
+        showAlert()
     }
-    @objc func logOut(){
-        UserDefaultManager.shared.saveReg(reg: false)
+    func showAlert() {
+        let alert = UIAlertController(title: "Are you sure?", message: "You really want log out", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { alert in
+            self.dismiss(animated: false)
+        }))
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { alert in
+            self.loginVC()
+            UserDefaultManager.shared.saveReg(reg: false)
+        }))
+        present(alert, animated: true)
+    }
+    func loginVC() {
         let vc = LoginVC()
-        tabBarController?.navigationController?.navigationItem.hidesBackButton = true
-        navigationController?.pushViewController(vc, animated: false)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: false, completion: nil)
     }
 }

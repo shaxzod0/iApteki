@@ -8,9 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol getPhoneNumberProtocol{
+    func getPhoneNumber(_ number: String)
+}
+
 class SearchItemsCell: UICollectionViewCell {
+    var delegate: getPhoneNumberProtocol?
     let pharmacyLogo = UIImageView()
     let pharmacyName = UILabel()
+    let medicineName = UILabel()
     let medicinePrice = UILabel()
     let pharmacyLocation = UILabel()
     let pharmacyPhone = UILabel()
@@ -33,6 +39,7 @@ extension SearchItemsCell{
     private func initViews(){
         self.addSubview(pharmacyLogo)
         self.addSubview(pharmacyName)
+        self.addSubview(medicineName)
         self.addSubview(medicinePrice)
         self.addSubview(pharmacyLocation)
         self.addSubview(pharmacyPhone)
@@ -51,6 +58,12 @@ extension SearchItemsCell{
             make.width.equalTo(100)
             make.centerY.equalTo(pharmacyName.snp.centerY)
             make.right.equalTo(pharmacyName.snp.left).inset(-20)
+        }
+        medicineName.text = "Trimol"
+        medicineName.textColor = .greenColor
+        medicineName.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(10)
+            make.top.equalToSuperview().offset(70)
         }
         medicinePrice.text = "2 100 so'm"
         medicinePrice.font = .systemFont(ofSize: 30, weight: .bold)
@@ -95,11 +108,24 @@ extension SearchItemsCell{
         callButton.layer.shadowOpacity = 0.9
         callButton.layer.shadowRadius = 3.0
         callButton.layer.masksToBounds = false
+        callButton.addTarget(self, action: #selector(somethingTaooed), for: .touchUpInside)
         callButton.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.4)
             make.height.equalTo(55)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-10)
         }
+    }
+    
+    @objc func somethingTaooed() {
+        delegate?.getPhoneNumber(pharmacyPhone.text ?? "")
+    }
+    func setItems(item: MedicineItemsModel){
+        pharmacyLogo.image = UIImage(named: item.pharmacyLogo)
+        pharmacyName.text = item.pharmacyName
+        medicineName.text = item.medicineName
+        medicinePrice.text = "\(item.medicinePrice) so'm"
+        pharmacyLocation.text = item.pharmacyAddress
+        pharmacyPhone.text = item.pharmacyPhone
     }
 }

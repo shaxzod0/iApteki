@@ -38,8 +38,8 @@ extension PharmaciesCell{
         pharmacyName.text = "Akmalpharm"
         pharmacyLogo.image = UIImage(named: "akmal")
         pharmacyLogo.snp.makeConstraints { make in
-            make.height.equalTo(60)
-            make.width.equalTo(80)
+            make.height.equalTo(40)
+            make.width.equalTo(90)
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().inset(20)
         }
@@ -56,7 +56,7 @@ extension PharmaciesCell{
         pharmacyAddress.font = .systemFont(ofSize: 14, weight: .regular)
         pharmacyAddress.numberOfLines = 0
         pharmacyAddress.snp.makeConstraints { make in
-            make.top.equalTo(pharmacyName.snp.bottom).offset(20)
+            make.top.equalTo(pharmacyName.snp.bottom).offset(10)
             make.left.equalTo(pharmacyLogo.snp.right).inset(-20)
             make.right.equalToSuperview().inset(10)
         }

@@ -9,7 +9,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.478909993091-e83o3gnkv6kjm25gpm83039478ndf1ll</string>
+				<string>com.googleusercontent.apps.478909993091-i2f7adev12kv7kk1o0uv9o2f32b03tn6</string>
 			</array>
 		</dict>
 	</array>
@@ -30,5 +30,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

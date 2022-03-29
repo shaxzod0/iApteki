@@ -17,4 +17,6 @@ target 'iApteki' do
   pod 'IQKeyboardManager'
   pod 'GoogleSignIn'
   pod 'SOTabBar'
+  pod 'FirebaseCore'
+  pod 'FirebaseMessaging'
 end

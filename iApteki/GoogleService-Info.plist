@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>478909993091-e83o3gnkv6kjm25gpm83039478ndf1ll.apps.googleusercontent.com</string>
+	<string>478909993091-i2f7adev12kv7kk1o0uv9o2f32b03tn6.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.478909993091-e83o3gnkv6kjm25gpm83039478ndf1ll</string>
+	<string>com.googleusercontent.apps.478909993091-i2f7adev12kv7kk1o0uv9o2f32b03tn6</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBW7KNQ0cfeino6ZZ-oZHjfylaU6QELzNo</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>co.shahzod.iApteki</string>
+	<string>co.shakhzod.iApteki</string>
 	<key>PROJECT_ID</key>
 	<string>iapteki</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:478909993091:ios:f18e40162bd52b09020bb6</string>
+	<string>1:478909993091:ios:6490af432fe837d9020bb6</string>
 </dict>
 </plist>

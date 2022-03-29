@@ -8,14 +8,20 @@
 import UIKit
 import MapKit
 
+
 class SearchVC: UIViewController {
     let searchTF = UITextField()
     weak var collectionView: UICollectionView?
     let locationManager = CLLocationManager()
     var locationParam = ""
+    let data = MockData.medicineData
+    
+    var medicineList: [MedicineItemsModel] = []
+    var searchedMedicine: [MedicineItemsModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundColor
+        searchedMedicine = data
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         initViews()
@@ -27,14 +33,24 @@ class SearchVC: UIViewController {
     }
 }
 // MARK: UI
-extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource{
-
+extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, getPhoneNumberProtocol{
+    func getPhoneNumber(_ number: String) {
+        guard let url = URL(string: "telprompt://\(number)"),
+                UIApplication.shared.canOpenURL(url) else {
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
     
     private func initViews(){
         view.addSubview(searchTF)
         searchTF.placeholder = "Search for medicine"
         searchTF.backgroundColor = .white
         searchTF.layer.cornerRadius = 12
+        searchTF.delegate = self
+        searchTF.autocorrectionType = .no
+        searchTF.clearButtonMode = .whileEditing
+        searchTF.returnKeyType = .search
         searchTF.setLeftView(image: UIImage(named: "search-sel")!)
         searchTF.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.9)
@@ -69,11 +85,14 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
         self.collectionView = collectionView
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return searchedMedicine.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchItemsCell.identifier, for: indexPath) as! SearchItemsCell
+        cell.delegate = self
+        cell.setItems(item: searchedMedicine[indexPath.item])
+       
         return cell
     }
     
@@ -92,6 +111,7 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
             tabBarVC.navigationItem.titleView = logoView
         }
     }
+ 
 }
 
 // MARK: Location
@@ -120,5 +140,40 @@ extension SearchVC: CLLocationManagerDelegate{
     }
     @objc func getLocation(){
         locationManager.startUpdatingLocation()
+    }
+}
+
+
+extension SearchVC: UITextFieldDelegate{
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        print(string)
+        return true
+        
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        searchTF.resignFirstResponder()
+        self.searchedMedicine.removeAll()
+        for str in medicineList{
+            searchedMedicine.append(str)
+            print(str)
+        }
+        return true
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if searchTF.text?.count != 0{
+            self.searchedMedicine.removeAll()
+            for str in data{
+                let range = str.medicineName.lowercased().range(of: textField.text!, options: .caseInsensitive, range: nil, locale: nil)
+                if range != nil{
+                    self.searchedMedicine.append(str)
+                }
+            }
+        } else {
+            searchedMedicine = data
+        }
+        collectionView?.reloadData()
+        return true
     }
 }

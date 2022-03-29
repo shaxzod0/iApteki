@@ -15,6 +15,7 @@ class LoginVC: UIViewController {
     let subText = UILabel()
     let introductionText = UILabel()
     let phoneNumberTF = UITextField()
+    let nameTF = UITextField()
     let getCodeButton = UIButton()
     let signInWithGoogle = UIButton()
     override func viewDidLoad() {
@@ -49,14 +50,25 @@ extension LoginVC{
             make.top.equalTo(subText.snp.bottom).offset(40)
             make.left.right.equalToSuperview().inset(30)
         }
+        view.addSubview(nameTF)
+        nameTF.placeholder = "Enter name"
+        nameTF.backgroundColor = .white
+        nameTF.layer.cornerRadius = 12
+        nameTF.setLeftPaddingPoints(20)
+        nameTF.snp.makeConstraints { make in
+            make.top.equalTo(introductionText.snp.bottom).offset(20)
+            make.height.equalTo(55)
+            make.width.equalToSuperview().multipliedBy(0.8)
+            make.centerX.equalToSuperview()
+        }
         view.addSubview(phoneNumberTF)
-        phoneNumberTF.placeholder = "Enter a valid phone number"
+        phoneNumberTF.text = "+998"
         phoneNumberTF.backgroundColor = .white
         phoneNumberTF.layer.cornerRadius = 12
         phoneNumberTF.setLeftPaddingPoints(20)
         phoneNumberTF.keyboardType = .phonePad
         phoneNumberTF.snp.makeConstraints { make in
-            make.top.equalTo(introductionText.snp.bottom).offset(20)
+            make.top.equalTo(nameTF.snp.bottom).offset(20)
             make.height.equalTo(55)
             make.width.equalToSuperview().multipliedBy(0.8)
             make.centerX.equalToSuperview()
@@ -87,9 +99,17 @@ extension LoginVC{
         }
     }
     @objc func getCode(){
+        if phoneNumberTF.text!.isEmpty || ((nameTF.text?.isEmpty) != nil){
+            phoneNumberTF.layer.borderWidth = 1
+            phoneNumberTF.layer.borderColor = UIColor.red.cgColor
+            nameTF.textColor = .red
+            nameTF.layer.borderWidth = 1
+            nameTF.layer.borderColor = UIColor.red.cgColor
+        }else{
         let vc = CodeConfirmationVC()
         navigationController?.navigationBar.barTintColor = .greenColor
         navigationController?.pushViewController(vc, animated: true)
+        }
     }
     @objc func signInGoogle(){
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }

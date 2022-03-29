@@ -19,6 +19,19 @@ struct PharmacyStoresModel{
     let pharmacyPhone: String
 }
 
+struct MedicineItemsModel{
+    let pharmacyName: String
+    let pharmacyAddress: String
+    let pharmacyLogo: String
+    let pharmacyPhone: String
+    let pharmacyLong: Float
+    let pharmacyLat: Float
+    let medicineName: String
+    let medicinePrice: Int
+}
+
+
+
 struct SharesModel{
     let shareImage: String
 }

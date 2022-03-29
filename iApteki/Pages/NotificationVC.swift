@@ -48,8 +48,9 @@ extension NotificationVC: UITableViewDelegate, UITableViewDataSource{
         alert.addTextField { (dataTextField) in
             self.doDatePicker()
             dataTextField.placeholder = "Data and time"
-            dataTextField.inputView = self.datePicker
             dataTextField.inputAccessoryView = self.toolBar
+            dataTextField.inputView = self.datePicker
+            
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { save in
@@ -61,36 +62,28 @@ extension NotificationVC: UITableViewDelegate, UITableViewDataSource{
         }))
     }
     func doDatePicker(){
-        self.datePicker = UIDatePicker(frame:CGRect(x: 0, y: 0, width:self.view.frame.size.width, height: 400))
+        self.datePicker = UIDatePicker()
         self.datePicker.backgroundColor = UIColor.white
         datePicker.datePickerMode = .dateAndTime
         datePicker.preferredDatePickerStyle = .wheels
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = false
-        toolBar.tintColor = .gray
         toolBar.sizeToFit()
-        
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donedatePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: true)
         toolBar.isUserInteractionEnabled = true
-        
-        self.toolBar.isHidden = false
-        
     }
     
     
-    @objc func donedatePicker(){
+    @objc func donedatePicker(string: String){
         let dateFormatter1 = DateFormatter()
+        dateFormatter1.dateFormat = "dd/MM/yyyy HH:mm"
         dateFormatter1.dateStyle = .medium
         dateFormatter1.timeStyle = .none
-        datePicker.isHidden = true
-        self.toolBar.isHidden = true
+        self.view.endEditing(true)
     }
     @objc func cancelDatePicker(){
-        datePicker.isHidden = true
-        self.toolBar.isHidden = true
+        self.view.endEditing(true)
     }
     
     

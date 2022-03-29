@@ -19,9 +19,8 @@ class MockData{
         PharmacyStoresModel(pharmacyName: "Akmal pharm", pharmacyAddress: "Andijon shaxar, 1-kichik daxa", pharmacyLogo: "akmal", pharmacyPhone: "+998 99 123 12 12"),
     ]
     static let sharesData: [SharesModel] = [
-        SharesModel(shareImage: "carousel"),
-        SharesModel(shareImage: "carousel"),
-        SharesModel(shareImage: "carousel")
+        SharesModel(shareImage: "1"),
+        SharesModel(shareImage: "2")
     ]
     static let medicineData: [MedicineItemsModel] = [
         MedicineItemsModel(pharmacyName: "Safo pharm", pharmacyAddress: "Yangi bozor", pharmacyLogo: "safo", pharmacyPhone: "+9981231232", pharmacyLong:72.346873, pharmacyLat: 40.785302, medicineName: "Trimol", medicinePrice: 7000),

@@ -99,16 +99,24 @@ extension LoginVC{
         }
     }
     @objc func getCode(){
-        if phoneNumberTF.text!.isEmpty || ((nameTF.text?.isEmpty) != nil){
+        guard let phoneNumber = phoneNumberTF.text, !phoneNumber.isEmpty else {
             phoneNumberTF.layer.borderWidth = 1
             phoneNumberTF.layer.borderColor = UIColor.red.cgColor
             nameTF.textColor = .red
             nameTF.layer.borderWidth = 1
             nameTF.layer.borderColor = UIColor.red.cgColor
-        }else{
-        let vc = CodeConfirmationVC()
-        navigationController?.navigationBar.barTintColor = .greenColor
-        navigationController?.pushViewController(vc, animated: true)
+            return
+        }
+        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
+            if let error = error {
+                print("masher " + error.localizedDescription)
+                return
+            }
+            let vc =  CodeConfirmationVC()
+            vc.verificationId = verificationID
+            self.navigationController?.pushViewController(vc, animated: true)
+            UserDefaultManager.shared.saveName(name: self.nameTF.text)
+            UserDefaultManager.shared.saveAddress(address: self.phoneNumberTF.text)
         }
     }
     @objc func signInGoogle(){

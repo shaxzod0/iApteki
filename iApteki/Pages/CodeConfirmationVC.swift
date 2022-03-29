@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class CodeConfirmationVC: UIViewController, UITextFieldDelegate {
     let logoImage = UIImageView()
@@ -86,7 +87,24 @@ extension CodeConfirmationVC{
         verifyButtom.addTarget(self, action: #selector(getConfirm), for: .touchUpInside)
     }
     @objc func getConfirm(){
-        let vc = TabBarController()
-        navigationController?.pushViewController(vc, animated: true)
+        var verificationCode = ""
+        for tf in textFieldBank {
+            verificationCode.append(tf.text ?? "")
+        }
+        let credential = PhoneAuthProvider.provider().credential(
+            withVerificationID: verificationId!,
+          verificationCode: verificationCode
+        )
+        Auth.auth().signIn(with: credential) { authResult, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            let vc = UINavigationController(rootViewController: TabBarController())
+            vc.modalPresentationStyle = .fullScreen
+            vc.modalTransitionStyle = .flipHorizontal
+            self.present(vc, animated: false, completion: nil)
+            UserDefaultManager.shared.saveReg(reg: true)
+        }
     }
 }

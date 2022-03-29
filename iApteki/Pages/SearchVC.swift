@@ -146,12 +146,6 @@ extension SearchVC: CLLocationManagerDelegate{
 
 extension SearchVC: UITextFieldDelegate{
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print(string)
-        return true
-        
-    }
-    
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         searchTF.resignFirstResponder()
         self.searchedMedicine.removeAll()

@@ -56,6 +56,7 @@ extension SettingsVC{
         profileAddress.snp.makeConstraints { make in
             make.top.equalTo(profileName.snp.bottom).offset(20)
             make.left.equalTo(profileImage.snp.right).inset(-20)
+            make.right.equalToSuperview().inset(10)
         }
         
     }
@@ -82,11 +83,12 @@ extension SettingsVC{
         alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { alert in
             self.loginVC()
             UserDefaultManager.shared.saveReg(reg: false)
+            UserDefaultManager.shared.saveProfileImage(address: URL(string:"https://picsum.photos/200"))
         }))
         present(alert, animated: true)
     }
     func loginVC() {
-        let vc = LoginVC()
+        let vc = UINavigationController(rootViewController: LoginVC())
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: false, completion: nil)
     }
